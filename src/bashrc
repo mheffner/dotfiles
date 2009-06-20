@@ -1,0 +1,66 @@
+# /etc/skel/.bashrc:
+
+# This file is sourced by all *interactive* bash shells on startup.  This
+# file *should generate no output* or it will break the scp and rcp commands.
+
+#
+# Aliases
+#
+eval `dircolors -b /etc/DIR_COLORS`
+alias ls-al="ls -al"
+alias lcvs="cvs -d spock@hedwig:/cvs"
+alias fbsdscvs="cvs -d mikeh@ncvs.freebsd.org:/home/ncvs"
+alias fbsdpcvs="cvs -d mikeh@pcvs.freebsd.org:/home/pcvs"
+
+alias svndiffls='svn diff \!* | grep ^Index | cut -d " " -f 2'
+alias snv="svn"
+
+alias rpmqvendor='rpm -qa --queryformat "%{NAME}-%{VENDOR}\n"'
+alias run-enscript='enscript --media=Letter -GEc -fCourier7 -r -j -2 -v -C --lines-per-page=120 \!*'
+
+alias makeit='make -s clean && make -s all && make -s install'
+
+alias unrarit='unrar x -y \!*'
+alias gr='grep -Irn \!$ .'
+
+#
+# Environment
+#
+export PATH=$HOME/bin:$PATH
+export SVNROOT=svn+ssh://svn.bburg.evergrid.com/opt/svn/cdc
+export NSVNROOT=svn+ssh://nagini.fesnel.com/var/svn/mikeh
+
+export FLEX3_HOME=$HOME/tmp/flexsdk
+export FLEX4_HOME=$HOME/tmp/flexsdk4
+
+export FLEX_HOME=${FLEX4_HOME}
+
+export FZLIB_HOME=$HOME/tmp/fzlib/FZlib
+
+export MOZ_PLUGIN_PATH=$HOME/.firefox/plugins
+
+#
+# Editor
+#
+export SVN_EDITOR=/home/mheffner/bin/svncitemp.sh
+export SVN_REAL_EDITOR=$EDITOR
+
+
+# Key bindings
+export INPUTRC=$HOME/.inputrc
+
+# History
+export HISTSIZE=1024
+
+# Change the window title of X terminals 
+case $TERM in
+	xterm*|rxvt|Eterm|eterm)
+		PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\007"'
+		;;
+	screen)
+		PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\033\\"'
+		;;
+esac
+
+##uncomment the following to activate bash-completion:
+#[ -f /etc/profile.d/bash-completion ] && source /etc/profile.d/bash-completion
