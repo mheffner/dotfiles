@@ -42,6 +42,18 @@ export MOZ_PLUGIN_PATH=$HOME/.firefox/plugins
 #
 # Editor
 #
+which xemacs &> /dev/null
+if [ $? -eq 0 ]; then
+	export EDITOR=xemacs
+else
+	which vim &> /dev/null
+	if [ $? -eq 0 ]; then
+	   export EDITOR=vim
+	else
+	   export EDITOR=vi
+	fi
+fi
+
 export SVN_EDITOR=/home/mheffner/bin/svncitemp.sh
 export SVN_REAL_EDITOR=$EDITOR
 
