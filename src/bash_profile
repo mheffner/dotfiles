@@ -3,3 +3,17 @@
 #This file is sourced by bash when you log in interactively.
 [ -f ~/.bashrc ] && . ~/.bashrc
 
+
+# Display exit status of previous command on failure
+#
+function printexitvalue()
+{
+	SAVE_EXIT=$?
+
+	if [ $SAVE_EXIT -ne 0 ]; then
+	   echo "Exit $SAVE_EXIT";
+	fi
+
+	return $SAVE_EXIT
+}
+export PROMPT_COMMAND=printexitvalue
