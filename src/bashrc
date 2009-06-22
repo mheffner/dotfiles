@@ -65,6 +65,9 @@ export INPUTRC=$HOME/.inputrc
 export HISTSIZE=1024
 HISTIGNORE='&'
 
+# Coresize
+ulimit -c 10240000
+
 # Prompt
 export PROMPT_DIRTRIM=3
 function gitcurrbranch()
@@ -77,27 +80,20 @@ function gitcurrbranch()
 function getwintitle()
 {
 	case $TERM in
-	     xterm*|rxvt)
+	     xterm*|rxvt|Eterm|eterm)
 		    # Set icon title
 		    printf "\[\033]1;\h:\`basename '\w'\`\007\]"
 		    # Set window title
 		    printf "\[\033]2;\h:\w\007\]"
+		    ;;
+	     screen)
+		    printf "\[\033_\h:\w\033\\"
 		    ;;
 	     *)
 		    ;;
         esac
 }
 export PS1="\h\`gitcurrbranch\`:$(tput bold)\w$(tput sgr0)$ `getwintitle`"
-
-# Change the window title of X terminals 
-case $TERM in
-	xterm*|rxvt|Eterm|eterm)
-		PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\007"'
-		;;
-	screen)
-		PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\033\\"'
-		;;
-esac
 
 ##uncomment the following to activate bash-completion:
 #[ -f /etc/profile.d/bash-completion ] && source /etc/profile.d/bash-completion
