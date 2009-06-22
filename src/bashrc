@@ -63,6 +63,31 @@ export INPUTRC=$HOME/.inputrc
 
 # History
 export HISTSIZE=1024
+HISTIGNORE='&'
+
+# Prompt
+export PROMPT_DIRTRIM=3
+function gitcurrbranch()
+{
+	BRANCH=`git branch 2> /dev/null | awk '/^*/{print $2}'`
+	if [ ! -z "$BRANCH" ]; then
+	   printf "(\e[1;31m$BRANCH\e[m)"
+	fi
+}
+function getwintitle()
+{
+	case $TERM in
+	     xterm*|rxvt)
+		    # Set icon title
+		    printf "\[\033]1;\h:\`basename '\w'\`\007\]"
+		    # Set window title
+		    printf "\[\033]2;\h:\w\007\]"
+		    ;;
+	     *)
+		    ;;
+        esac
+}
+export PS1="\h\`gitcurrbranch\`:$(tput bold)\w$(tput sgr0)$ `getwintitle`"
 
 # Change the window title of X terminals 
 case $TERM in
