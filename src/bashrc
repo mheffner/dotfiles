@@ -7,6 +7,9 @@
 # Aliases
 #
 eval `dircolors -b /etc/DIR_COLORS`
+unalias ls
+unalias ll
+alias ll="ls -al"
 alias ls-al="ls -al"
 alias lcvs="cvs -d spock@hedwig:/cvs"
 alias fbsdscvs="cvs -d mikeh@ncvs.freebsd.org:/home/ncvs"
