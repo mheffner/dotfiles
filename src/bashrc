@@ -73,32 +73,37 @@ ulimit -c 10240000
 
 # Prompt
 export PROMPT_DIRTRIM=3
+
+function in_gb()
+{
+    git branch &> /dev/null
+    return $?
+}
+
 function gitcurrbranch()
 {
-	local BRANCH=`git branch 2> /dev/null | awk '/^*/{print $2}'`
-	if [ ! -z "$BRANCH" ]; then
-	   printf "(\e[1;31m$BRANCH\e[m)"
-	fi
+	git branch 2> /dev/null | awk '/^*/{print $2}'
 }
+
 function getwintitle()
 {
 
     case $TERM in
 	xterm*|rxvt|Eterm|eterm)
 	    # Set icon title
-	    printf "\[\033]1;\h:\`basename '\w'\`\007\]"
+	    printf "\[\e]1;\h:\`basename '\w'\`\007\]"
 	    # Set window title
-	    printf "\[\033]2;\h:\w\007\]"
+	    printf "\[\e]2;\h:\w\007\]"
 	    ;;
 	screen)
-	    printf "\[\033_\h:\w\033\\"
+	    printf "\[\e_\h:\w\e\\"
 	    ;;
 	*)
 	    ;;
     esac
 }
 
-export PS1="\h\`gitcurrbranch\`:\`tput bold\`\w\`tput sgr0\`$ `getwintitle`"
+export PS1="\h\$(in_gb && echo \()\[\e[1;31m\]\$(gitcurrbranch)\[\e[m\]\$(in_gb && echo \)):\[\`tput bold\`\]\w\[\`tput sgr0\`\]$ `getwintitle`"
 
 ##uncomment the following to activate bash-completion:
 #[ -f /etc/profile.d/bash-completion ] && source /etc/profile.d/bash-completion
