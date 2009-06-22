@@ -7,8 +7,8 @@
 # Aliases
 #
 eval `dircolors -b /etc/DIR_COLORS`
-unalias ls
-unalias ll
+alias ls="ls"
+alias ll="ls -al"
 alias ll="ls -al"
 alias ls-al="ls -al"
 alias lcvs="cvs -d spock@hedwig:/cvs"
@@ -82,24 +82,41 @@ function gitcurrbranch()
 }
 function getwintitle()
 {
-	case $TERM in
-	     xterm*|rxvt|Eterm|eterm)
-		    # Set icon title
-		    printf "\[\033]1;\h:\`basename '\w'\`\007\]"
-		    # Set window title
-		    printf "\[\033]2;\h:\w\007\]"
-		    ;;
-	     screen)
-		    printf "\[\033_\h:\w\033\\"
-		    ;;
-	     *)
-		    ;;
-        esac
+
+    case $TERM in
+	xterm*|rxvt|Eterm|eterm)
+	    # Set icon title
+	    printf "\[\033]1;\h:\`basename '\w'\`\007\]"
+	    # Set window title
+	    printf "\[\033]2;\h:\w\007\]"
+	    ;;
+	screen)
+	    printf "\[\033_\h:\w\033\\"
+	    ;;
+	*)
+	    ;;
+    esac
 }
-export PS1="\h\`gitcurrbranch\`:$(tput bold)\w$(tput sgr0)$ `getwintitle`"
+
+export PS1="\h\`gitcurrbranch\`:\`tput bold\`\w\`tput sgr0\`$ `getwintitle`"
 
 ##uncomment the following to activate bash-completion:
 #[ -f /etc/profile.d/bash-completion ] && source /etc/profile.d/bash-completion
+
+
+# Display exit status of previous command on failure
+#
+function printexitvalue()
+{
+	SAVE_EXIT=$?
+
+	if [ $SAVE_EXIT -ne 0 ]; then
+	   echo "Exit $SAVE_EXIT";
+	fi
+
+	return $SAVE_EXIT
+}
+export PROMPT_COMMAND=printexitvalue
 
 
 #
@@ -108,3 +125,9 @@ export PS1="\h\`gitcurrbranch\`:$(tput bold)\w$(tput sgr0)$ `getwintitle`"
 if [ -e $HOME/.bash.priv ]; then
    . $HOME/.bash.priv
 fi
+
+# --Xemacs--
+#
+# -*- Local Variables:
+# -*- mode:shell-script
+# -*- End:
