@@ -106,8 +106,9 @@ function getwintitle()
 export PS1="\h\$(in_gb && echo \()\[\e[1;31m\]\$(gitcurrbranch)\[\e[m\]\$(in_gb && echo \)):\[\`tput bold\`\]\w\[\`tput sgr0\`\]$ `getwintitle`"
 
 ##uncomment the following to activate bash-completion:
-#[ -f /etc/profile.d/bash-completion ] && source /etc/profile.d/bash-completion
-
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
 
 # Display exit status of previous command on failure
 #
