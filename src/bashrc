@@ -110,7 +110,47 @@ function getwintitle()
     esac
 }
 
-export PS1="\h\$(in_gb && echo \()\[\e[1;31m\]\$(gitcurrbranch)\[\e[m\]\$(in_gb && echo \)):\[\`tput bold\`\]\w\[\`tput sgr0\`\]$ `getwintitle`"
+# Emulate %c from tcsh
+# Stolen from: http://bsdjlh.blogspot.com/2009/02/bash-prompt-trick-cheap-emulation-of.html
+# (with minor mods)
+function traildir()
+{
+    local n=$1 dir=$2
+    local sl tildedir homelen shifted  traildir
+    local oldifs=$IFS
+
+    tildedir=${dir#$HOME}
+    if ! [[ "$tildedir" == "$dir" ]]; then
+            # Special break out case
+            [[ -z "$tildedir" ]] && { echo "~"; return 0; }
+
+            sl="~/"
+    else
+            sl="/"
+    fi
+
+    set -- ${HOME//\// }
+    homelen=$#
+
+    shifted=0
+    IFS="/"
+    set -- ${tildedir/\//}
+    if [[ $# -gt $n ]]; then
+            shifted=$(($# - $n))
+            shift $shifted
+	    IFS="/"
+            traildir="$sl<$shifted>/$*"
+    else
+	    IFS="/"
+            traildir="$sl$*"
+    fi
+
+    IFS=$oldifs
+    echo $traildir
+}
+
+TRAILPWD=3
+export PS1="\h\$(in_gb && echo \()\[\e[1;31m\]\$(gitcurrbranch)\[\e[m\]\$(in_gb && echo \)):\[\`tput bold\`\]\$(traildir \$TRAILPWD \$PWD)\[\`tput sgr0\`\]$ `getwintitle`"
 
 ##uncomment the following to activate bash-completion:
 if [ -f /etc/bash_completion ]; then
