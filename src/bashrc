@@ -22,16 +22,18 @@ alias lcvs="cvs -d spock@hedwig:/cvs"
 alias fbsdscvs="cvs -d mikeh@ncvs.freebsd.org:/home/ncvs"
 alias fbsdpcvs="cvs -d mikeh@pcvs.freebsd.org:/home/pcvs"
 
-alias svndiffls='svn diff \!* | grep ^Index | cut -d " " -f 2'
-alias snv="svn"
-
 alias rpmqvendor='rpm -qa --queryformat "%{NAME}-%{VENDOR}\n"'
-alias run-enscript='enscript --media=Letter -GEc -fCourier7 -r -j -2 -v -C --lines-per-page=120 \!*'
+alias run-enscript='enscript --media=Letter -GEc -fCourier7 -r -j -2 -v -C --lines-per-page=120'
 
 alias makeit='make -s clean && make -s all && make -s install'
 
-alias unrarit='unrar x -y \!*'
-alias gr='grep -Irn \!$ .'
+alias unrarit='unrar x -y'
+
+#
+# Convenience functions (ie., aliases with parameter support)
+#
+function gr() { grep -Irn $@ .; }
+function svndiffls() { svn diff $@ | grep ^Index | cut -d " " -f 2; }
 
 #
 # Environment
