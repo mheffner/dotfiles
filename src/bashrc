@@ -34,6 +34,7 @@ alias unrarit='unrar x -y'
 #
 function gr() { grep -Irn $@ .; }
 function svndiffls() { svn diff $@ | grep ^Index | cut -d " " -f 2; }
+function gitdiffc() { git diff $1^!; }
 
 #
 # Environment
