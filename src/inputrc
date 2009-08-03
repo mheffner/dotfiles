@@ -7,4 +7,15 @@
 "\e[C": forward-char
 "\e[D": backward-char
 
+# Hide dot files
 set match-hidden-files off
+
+# Case insensitive completion
+set completion-ignore-case On
+
+# Emacs editing mode please
+set editing-mode emacs
+set keymap emacs
+
+# Immediately show ambiguity
+set show-all-if-ambiguous On
