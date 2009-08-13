@@ -29,12 +29,14 @@ alias makeit='make -s clean && make -s all && make -s install'
 
 alias unrarit='unrar x -y'
 
+alias git-diff='git diff --no-prefix'
+
 #
 # Convenience functions (ie., aliases with parameter support)
 #
 function gr() { grep -Irn $@ .; }
 function svndiffls() { svn diff $@ | grep ^Index | cut -d " " -f 2; }
-function gitdiffc() { git diff $1^!; }
+function gitdiffc() { git diff --no-prefix $1^!; }
 
 #
 # Environment
