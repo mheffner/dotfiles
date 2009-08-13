@@ -175,6 +175,13 @@ function printexitvalue()
 }
 export PROMPT_COMMAND=printexitvalue
 
+#
+# bash does not play well with rxvt
+# XXX: no idea if this is generally a good fix???
+#
+if [ "$TERM" = "rxvt" ]; then
+    export TERM=xterm
+fi
 
 #
 # Source private bash file if it exists
