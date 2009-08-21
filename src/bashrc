@@ -59,9 +59,9 @@ export LANG=C
 #
 # Editor
 #
-which xemacs &> /dev/null
+which emacs &> /dev/null
 if [ $? -eq 0 ]; then
-	export EDITOR=xemacs
+	export EDITOR=emacs
 else
 	which vim &> /dev/null
 	if [ $? -eq 0 ]; then
@@ -87,17 +87,6 @@ ulimit -c 10240000
 
 # Prompt
 export PROMPT_DIRTRIM=3
-
-function in_gb()
-{
-    git branch &> /dev/null
-    return $?
-}
-
-function gitcurrbranch()
-{
-	git branch 2> /dev/null | awk '/^*/{print $2}'
-}
 
 function getwintitle()
 {
@@ -155,13 +144,18 @@ function traildir()
     echo $traildir
 }
 
-TRAILPWD=3
-export PS1="\h\$(in_gb && echo \()\[\e[1;31m\]\$(gitcurrbranch)\[\e[m\]\$(in_gb && echo \)):\[\`tput bold\`\]\$(traildir \$TRAILPWD \"\$PWD\")\[\`tput sgr0\`\]$ `getwintitle`"
-
 ##uncomment the following to activate bash-completion:
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
+
+. $HOME/.bash.completion_git
+
+# Show dirty state
+export GIT_PS1_SHOWDIRTYSTATE=1
+
+TRAILPWD=3
+export PS1="\h\\[\e[1;31m\]\$(__git_ps1 \"(%s)\")\[\e[m\]:\[\`tput bold\`\]\$(traildir \$TRAILPWD \"\$PWD\")\[\`tput sgr0\`\]$ `getwintitle`"
 
 # Display exit status of previous command on failure
 #
