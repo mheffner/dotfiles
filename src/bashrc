@@ -131,7 +131,6 @@ function traildir()
     shifted=0
     IFS="/"
     set -- ${tildedir/\//}
-    IFS="/"
     if [[ $# -gt $n ]]; then
             shifted=$(($# - $n))
             shift $shifted
