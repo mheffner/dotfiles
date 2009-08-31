@@ -148,7 +148,12 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-. $HOME/.bash.completion_git
+#
+# Command completion
+#
+. $HOME/.bash_completion_git.sh
+complete -C $HOME/.bash_completion_rake.rb -o default rake
+
 
 # Show dirty state
 export GIT_PS1_SHOWDIRTYSTATE=1
