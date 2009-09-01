@@ -29,8 +29,6 @@ alias makeit='make -s clean && make -s all && make -s install'
 
 alias unrarit='unrar x -y'
 
-alias git-diff='git diff --no-prefix'
-
 #
 # Convenience functions (ie., aliases with parameter support)
 #
