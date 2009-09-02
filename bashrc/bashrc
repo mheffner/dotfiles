@@ -22,6 +22,9 @@ alias lcvs="cvs -d spock@hedwig:/cvs"
 alias fbsdscvs="cvs -d mikeh@ncvs.freebsd.org:/home/ncvs"
 alias fbsdpcvs="cvs -d mikeh@pcvs.freebsd.org:/home/pcvs"
 
+# This will get me all the time
+alias ci=vi
+
 alias rpmqvendor='rpm -qa --queryformat "%{NAME}-%{VENDOR}\n"'
 alias run-enscript='enscript --media=Letter -GEc -fCourier7 -r -j -2 -v -C --lines-per-page=120'
 
