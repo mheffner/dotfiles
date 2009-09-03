@@ -24,5 +24,6 @@ galias ci commit
 galias co checkout
 galias br branch
 galias df diff --no-prefix
+galias dc diff --no-prefix --cached
 galias dfp diff
 galias lp log -p
