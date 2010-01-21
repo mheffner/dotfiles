@@ -148,6 +148,22 @@ function traildir()
     echo $traildir
 }
 
+#
+# Manage Heroku credentials based on name
+#
+function hunset() {
+  rm -f ~/.heroku/credentials
+}
+
+function hset() {
+  hunset
+  ln -sf ~/.heroku/credentials_$1 ~/.heroku/credentials
+}
+
+function hsave() {
+  mv ~/.heroku/credentials ~/.heroku/credentials_$1
+}
+
 ##uncomment the following to activate bash-completion:
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
