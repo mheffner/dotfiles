@@ -164,6 +164,13 @@ function hsave() {
   mv ~/.heroku/credentials ~/.heroku/credentials_$1
 }
 
+#
+# Startup s3sh with correct variables
+#
+function mys3sh() {
+    AMAZON_ACCESS_KEY_ID="$S3_KEY" AMAZON_SECRET_ACCESS_KEY="$S3_SECRET" s3sh
+}
+
 ##uncomment the following to activate bash-completion:
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
