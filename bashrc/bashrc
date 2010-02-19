@@ -22,6 +22,7 @@ alias ls="ls"
 alias ll="ls -al"
 alias ll="ls -al"
 alias ls-al="ls -al"
+alias sl="ls"
 alias lcvs="cvs -d spock@hedwig:/cvs"
 alias fbsdscvs="cvs -d mikeh@ncvs.freebsd.org:/home/ncvs"
 alias fbsdpcvs="cvs -d mikeh@pcvs.freebsd.org:/home/pcvs"
@@ -42,6 +43,7 @@ alias unrarit='unrar x -y'
 function gr() { grep -Irn "$@" .; }
 function svndiffls() { svn diff $@ | grep ^Index | cut -d " " -f 2; }
 function gitdiffc() { git diff --no-prefix $1^!; }
+function cdls() { cd $1 && ls; }
 
 #
 # Environment
