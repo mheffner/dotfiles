@@ -154,16 +154,23 @@ function traildir()
 # Manage Heroku credentials based on name
 #
 function hunset() {
-  rm -f ~/.heroku/credentials
+  rm -f $HOME/.heroku/credentials
 }
 
 function hset() {
   hunset
-  ln -sf ~/.heroku/credentials_$1 ~/.heroku/credentials
+  ln -sf $HOME/.heroku/credentials_$1 $HOME/.heroku/credentials
 }
 
 function hsave() {
-  mv ~/.heroku/credentials ~/.heroku/credentials_$1
+  mv $HOME/.heroku/credentials $HOME/.heroku/credentials_$1
+}
+
+# List credentials with a * in front of active one
+function hlist() {
+  ls $HOME/.heroku/credentials_* |  \
+	awk -v n=`readlink $HOME/.heroku/credentials` \
+	'/.*credentials_(.*)$/{if ($1 == n) printf "*"; gsub(/^.*credentials_/, ""); print $0}'
 }
 
 #
@@ -172,6 +179,7 @@ function hsave() {
 function mys3sh() {
     AMAZON_ACCESS_KEY_ID="$S3_KEY" AMAZON_SECRET_ACCESS_KEY="$S3_SECRET" s3sh
 }
+
 
 ##uncomment the following to activate bash-completion:
 if [ -f /etc/bash_completion ]; then
