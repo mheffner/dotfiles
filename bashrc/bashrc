@@ -49,7 +49,7 @@ function cdls() { cd $1 && ls; }
 # Environment
 #
 export PATH=$HOME/bin:$PATH
-export SVNROOT=svn+ssh://svn.bburg.evergrid.com/opt/svn/cdc
+export SVNROOT=svn+ssh://svn.santaclara.librato.com/opt/svn/cdc
 export NSVNROOT=svn+ssh://nagini.fesnel.com/var/svn/mikeh
 
 export FLEX3_HOME=$HOME/tmp/flexsdk
