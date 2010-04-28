@@ -13,6 +13,7 @@ install:
 		echo "cp $(BASHRC_DIR)/bash_completion_$$x $(HOME)/.bash_completion_$$x"; \
 		cp $(BASHRC_DIR)/bash_completion_$$x $(HOME)/.bash_completion_$$x; \
 	done
+	cp dot.ackrc $(HOME)/.ackrc
 
 .PHONY: env
 env:
