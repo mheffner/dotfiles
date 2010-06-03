@@ -78,7 +78,7 @@ else
 	fi
 fi
 
-export SVN_EDITOR=/home/mheffner/bin/svncitemp.sh
+export SVN_EDITOR=$HOME/bin/svncitemp.sh
 export SVN_REAL_EDITOR=$EDITOR
 
 
