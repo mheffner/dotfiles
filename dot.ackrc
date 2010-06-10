@@ -2,3 +2,5 @@
 haml=.haml
 --type-set
 sass=.sass
+--type-set
+json=.json
