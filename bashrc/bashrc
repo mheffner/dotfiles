@@ -45,6 +45,23 @@ function svndiffls() { svn diff $@ | grep ^Index | cut -d " " -f 2; }
 function gitdiffc() { git diff --no-prefix $1^!; }
 function cdls() { cd $1 && ls; }
 
+# use correct remote?...defaults to origin
+function grb() {
+    if [ $# -eq 1 ]; then
+        git rebase $1
+        return $?
+    fi
+
+    # Else, rebase to origin/<current branch>
+    BR=$(git branch | egrep '^\*' | cut -d ' ' -f 2)
+    if [ -z "$BR" ]; then
+        echo "Can't determine branch"
+        return 1
+    fi
+
+    git rebase origin/$BR
+}
+
 #
 # Environment
 #
