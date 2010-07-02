@@ -27,6 +27,7 @@ alias lcvs="cvs -d spock@hedwig:/cvs"
 alias fbsdscvs="cvs -d mikeh@ncvs.freebsd.org:/home/ncvs"
 alias fbsdpcvs="cvs -d mikeh@pcvs.freebsd.org:/home/pcvs"
 alias ffile="find . -name"
+alias emnw="emacs -nw"
 
 # This will get me all the time
 alias ci=vi
@@ -61,6 +62,13 @@ function grb() {
     fi
 
     git rebase origin/$BR
+}
+
+# Switch AWS environment. Assumes each environ file
+# is an '$HOME/.ec2/$1/env'
+function aws()
+{
+	source $HOME/.ec2/$1/env
 }
 
 #
