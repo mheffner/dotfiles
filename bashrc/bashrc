@@ -28,6 +28,7 @@ alias fbsdscvs="cvs -d mikeh@ncvs.freebsd.org:/home/ncvs"
 alias fbsdpcvs="cvs -d mikeh@pcvs.freebsd.org:/home/pcvs"
 alias ffile="find . -name"
 alias emnw="emacs -nw"
+alias ackpg="ack --pager='less -R'"
 
 # This will get me all the time
 alias ci=vi
