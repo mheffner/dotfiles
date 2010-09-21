@@ -12,3 +12,6 @@ git config --global branch.autosetupmerge true
 
 # Limit git push to current branch
 git config --global push.default tracking
+
+# Use color on terminals
+git config --global color.ui auto

@@ -28,7 +28,7 @@ galias dc diff --no-prefix --cached
 galias ds diff --stat
 galias dfp diff
 galias lp log -p
-galias labbrev log --abbrev-commit --pretty=oneline
+galias ll log --abbrev-commit --pretty=oneline
 galias lg log --oneline --decorate --graph
 galias lga log --oneline --decorate --graph --all
 
