@@ -22,6 +22,7 @@ galias unpushed log --abbrev-commit --pretty=oneline origin/master...master
 galias st status
 galias ci commit
 galias co checkout
+galias cp cherry-pick
 galias br branch
 galias df diff --no-prefix
 galias dc diff --no-prefix --cached
