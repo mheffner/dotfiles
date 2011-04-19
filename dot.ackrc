@@ -1,6 +1,14 @@
+# Include HAML files
 --type-set
 haml=.haml
+
+# Include SASS files
 --type-set
 sass=.sass
+
+# Include JSON files
 --type-set
 json=.json
+
+# Ignore bundler directory
+--ignore-dir=.bundle
