@@ -74,6 +74,19 @@ function aws()
 	source $HOME/.ec2/$1/env
 }
 
+# Generate the Cassandra node's token value given its INDEX and the
+# TOTAL number of nodes
+function tokidx()
+{
+
+	if [ $# -ne 2 ]; then
+		echo "Usage: tokidx INDEX TOTAL"
+		return 1
+	fi
+
+	ruby -e 'puts ARGV[0].to_i * (2 ** 127 - 1) / ARGV[1].to_i' $1 $2
+}
+
 #
 # Environment
 #
