@@ -3,12 +3,16 @@
 haml=.haml
 
 # Include SASS files
---type-set
+--type-add
 sass=.sass
 
 # Include JSON files
---type-set
+--type-add
 json=.json
+
+# Include coffee files (XXX: as JS for now)
+--type-add
+js=.coffee
 
 # Ignore bundler directory
 --ignore-dir=.bundle
