@@ -20,6 +20,7 @@ git config --global --remove-section alias &> /dev/null
 
 galias unpushed log --abbrev-commit --pretty=oneline origin/master...master
 galias st status
+galias stat status
 galias ci commit
 galias co checkout
 galias cp cherry-pick
