@@ -1,0 +1,62 @@
+#
+# Development related bash stuff.
+#
+
+# Deploy a branch to heroku.
+#
+# This relies on your git remotes being setup as such:
+#
+#  origin     -> Upstream GIT repo
+#  staging    -> Staging deployment environment
+#  production -> Production deployment environment
+#
+# When deploying to production this will create a tag off the
+# deployed branch with the date as the tag name.
+#
+# Usage: heroku_deploy <staging|production> [<BRANCH>]
+#   (BRANCH not implemented yet, defaults to master)
+#
+function heroku_deploy()
+{
+	local ENV="$1"
+
+	if [ -z $ENV ]; then
+		echo "Usage: heroku_deploy <environment> [<BRANCH>]"
+		return 1
+	fi
+
+	if [ "$ENV" != "production" -a "$ENV" != "staging" ]; then
+		echo "Environment must be either production or staging"
+		return 1
+	fi
+
+	local BRANCH
+
+	if [ $# -gt 1 ]; then
+		BRANCH="$2"
+		echo "NOT IMPLEMENTED: only works with master right now"
+		return 1
+	fi
+
+	if [ "$ENV" = "production" ]; then
+		local DATE=$(date -u "+%Y-%m-%d_%H-%M")
+		local TAGNAME="v${DATE}"
+
+		git tag -a -m "Tagged by $USER" $TAGNAME || \
+		    { echo "Failed to tag $TAGNAME"; return 1; }
+
+		git push origin $TAGNAME || \
+		    { echo "Failed to push tag $TAGNAME to origin"; return 1; }
+
+	fi
+
+	git push $ENV master || \
+	    { echo "Failed to push master to $ENV"; return 1; }
+
+	return 0
+}
+
+
+# Local Variables:
+# mode: shell-script
+# End:

@@ -264,6 +264,13 @@ if [ "$TERM" = "rxvt" ]; then
 fi
 
 #
+# Source devel bash file if it exists
+#
+if [ -e $HOME/.bash.dev ]; then
+   . $HOME/.bash.dev
+fi
+
+#
 # Source private bash file if it exists
 #
 if [ -e $HOME/.bash.priv ]; then
