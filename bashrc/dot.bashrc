@@ -104,7 +104,7 @@ export FZLIB_HOME=$HOME/tmp/fzlib/FZlib
 
 export MOZ_PLUGIN_PATH=$HOME/.firefox/plugins
 
-export LANG=C
+#export LANG=C
 
 #
 # Editor
