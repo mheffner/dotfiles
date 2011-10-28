@@ -31,6 +31,7 @@ alias emnw="emacs -nw"
 alias ackpg="ack --pager='less -R'"
 alias pjson="python -mjson.tool"
 alias be="bundle exec"
+alias bi="bundle install --path .bundle/gems"
 
 # This will get me all the time
 alias ci=vi
