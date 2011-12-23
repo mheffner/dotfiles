@@ -56,6 +56,14 @@ function heroku_deploy()
 	return 0
 }
 
+#
+# Remove all local branches that have been merged to master.
+#
+function git-purge-merged-branches()
+{
+	git branch --merged master | egrep -v ' master$' | \
+	    xargs git branch -d
+}
 
 # Local Variables:
 # mode: shell-script
