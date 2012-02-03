@@ -14,5 +14,13 @@ json=.json
 --type-set
 coffee=.coffee
 
+# Feature files
+--type-set
+feature=.feature
+
+# Handlebar JS files
+--type-set
+handlebars=.handlebars
+
 # Ignore bundler directory
 --ignore-dir=.bundle
