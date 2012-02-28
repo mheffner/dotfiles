@@ -272,6 +272,13 @@ if [ -e $HOME/.bash.dev ]; then
 fi
 
 #
+# Source AWS bash file if it exists
+#
+if [ -e $HOME/.bash.aws ]; then
+   . $HOME/.bash.aws
+fi
+
+#
 # Source private bash file if it exists
 #
 if [ -e $HOME/.bash.priv ]; then

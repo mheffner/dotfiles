@@ -1,0 +1,26 @@
+#
+#
+# Functions for AWS related tasks.
+#
+
+#
+# Grab the hostname for all nodes matching a given
+# tag. Looks for all tagged instances where any part
+# of the tag matches 'tag-name'.
+#
+function aws_nodes_for_tag()
+{
+        if [ $# -ne 1 ]; then
+           echo "Usage: aws_nodes_for_tag tag-name"
+           return 1
+        fi
+
+        NAME="$1"
+
+        ec2dtag | grep "$NAME" | awk '{print $3}' | \
+                xargs -n 1 ec2din | egrep '^INSTANCE' | awk '{print $4}'
+}
+
+# Local Variables:
+# mode: sh
+# End:
