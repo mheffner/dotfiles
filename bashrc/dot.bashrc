@@ -131,6 +131,7 @@ export INPUTRC=$HOME/.inputrc
 # History
 export HISTSIZE=1024
 HISTIGNORE='&'
+export HISTTIMEFORMAT='%F %T '
 
 # Coresize
 ulimit -c 10240000
