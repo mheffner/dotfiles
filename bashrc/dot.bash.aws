@@ -21,6 +21,21 @@ function aws_nodes_for_tag()
                 xargs -n 1 ec2din | egrep '^INSTANCE' | awk '{print $4}'
 }
 
+#
+# Takes a list of instance IDs and returns their hostnames.
+#
+function aws_nodes_for_ids()
+{
+
+	if [ $# -lt 1 ]; then
+	   echo "Usage: aws_nodes_for_ids id1 [id2 id3 ...]"
+           return 1
+        fi
+
+	echo "$@" | xargs -n 1 ec2din | egrep '^INSTANCE' | awk '{print $4}'
+}
+
+
 # Local Variables:
 # mode: sh
 # End:
