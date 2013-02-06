@@ -18,7 +18,7 @@ function aws_nodes_for_tag()
         NAME="$1"
 
         ec2dtag | grep "$NAME" | awk '{print $3}' | \
-                xargs -n 1 ec2din | egrep '^INSTANCE' | awk '{print $4}'
+		xargs -n 10 ec2din | egrep '^INSTANCE' | awk '{print $4}'
 }
 
 #
@@ -32,7 +32,7 @@ function aws_nodes_for_ids()
            return 1
         fi
 
-	echo "$@" | xargs -n 1 ec2din | egrep '^INSTANCE' | awk '{print $4}'
+	echo "$@" | xargs -n 10 ec2din | egrep '^INSTANCE' | awk '{print $4}'
 }
 
 
