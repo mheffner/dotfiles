@@ -65,6 +65,46 @@ function git-purge-merged-branches()
 	    xargs git branch -d
 }
 
+#
+# For a project that uses increasing v<num> tag versioning,
+# bump the current tag by one and push it.
+#
+# Usage: git-tag [msg]
+#
+#  Examples:
+#
+#     $ git-tag
+#      Bumping tag from v243 -> v244
+#
+#     $ git-tag "new statsd timing release"
+#      Bumping tag from v243 -> v244
+#
+function git-tag()
+{
+	PREV_TAG=`git describe | cut -d '-' -f 1`
+	TAG_PREFIX=`echo $PREV_TAG | sed -e 's/[0-9][0-9]*$//'`
+
+	CURR_TAG=`echo $PREV_TAG | sed -e 's/^[^0-9]*//'`
+
+	if [ -z $CURR_TAG ]; then
+		echo "Can not parse tag!"
+		return 1
+	fi
+
+	NEW_TAG=$(( $CURR_TAG + 1 ))
+	NEW_TAG="${TAG_PREFIX}${NEW_TAG}"
+
+	echo "Bumping tag from ${PREV_TAG} -> ${NEW_TAG}"
+
+	MSG="$1"
+	if [ -z "$MSG" ]; then
+		MSG=$NEW_TAG
+	fi
+
+	git tag -a $NEW_TAG -m "${MSG}"
+	git push origin ${NEW_TAG}
+}
+
 # Local Variables:
 # mode: shell-script
 # End:
