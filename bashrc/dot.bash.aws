@@ -17,7 +17,7 @@ function aws_nodes_for_tag()
 
         NAME="$1"
 
-        ec2dtag | grep "$NAME" | awk '{print $3}' | \
+	ec2dtag | grep "$NAME" | awk '{print $3}' | sort | uniq | \
 		xargs -n 10 ec2din | egrep '^INSTANCE' | awk '{print $4}'
 }
 
