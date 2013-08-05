@@ -35,6 +35,30 @@ function aws_nodes_for_ids()
 	echo "$@" | xargs -n 10 ec2din | egrep '^INSTANCE' | awk '{print $4}'
 }
 
+#
+# Converts the command:
+#
+#     assh ubuntu@web-prod
+#
+# Into the assh command that logs into an instance tagged
+# 'web-prod'. Username is optional. The instance is selected as the
+# first one returned from the ec2dtag command.
+#
+function aws_assh_tag()
+{
+	if [ $# -lt 1 ]; then
+	   echo "Usage: aws_assh_tag [user@]<tag-name>"
+           return 1
+	fi
+
+	local ARG="$1"
+	local TAG=`echo $ARG | sed -e 's/^[^@]*@//'`
+
+	INST=`ec2dtag | grep $TAG | head -n 1 | awk '{print $3}'`
+
+	assh `echo $ARG | sed -e 's/'"$TAG"'/'"$INST"'/g'`
+}
+
 
 # Local Variables:
 # mode: sh
