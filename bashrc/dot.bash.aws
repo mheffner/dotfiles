@@ -54,6 +54,11 @@ function aws_assh_tag()
 
 	local ARG="$1"
 	local TAG=`echo $ARG | sed -e 's/^[^@]*@//'`
+	local U=${AWS_DEFAULT_USER}
+
+	if `echo $ARG | grep @ > /dev/null`; then
+		U=`echo $ARG | sed -e 's/@.*$//'`
+	fi
 
 	INST=`ec2dtag -F resource-type=instance | grep $TAG | head -n 1 | awk '{print $3}'`
 
@@ -62,7 +67,11 @@ function aws_assh_tag()
 		return 1
 	fi
 
-	assh `echo $ARG | sed -e 's/'"$TAG"'/'"$INST"'/g'`
+	if [ -n "$U" ]; then
+		assh "$U@$INST"
+	else
+		assh "$INST"
+	fi
 }
 
 
