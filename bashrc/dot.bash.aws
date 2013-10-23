@@ -17,7 +17,8 @@ function aws_nodes_for_tag()
 
         NAME="$1"
 
-	ec2dtag | grep "$NAME" | awk '{print $3}' | sort | uniq | \
+	ec2dtag -F resource-type=instance | grep "$NAME" | awk '{print $3}' | \
+		sort | uniq | \
 		xargs -n 10 ec2din | egrep '^INSTANCE' | awk '{print $4}'
 }
 
@@ -54,7 +55,7 @@ function aws_assh_tag()
 	local ARG="$1"
 	local TAG=`echo $ARG | sed -e 's/^[^@]*@//'`
 
-	INST=`ec2dtag | grep $TAG | head -n 1 | awk '{print $3}'`
+	INST=`ec2dtag -F resource-type=instance | grep $TAG | head -n 1 | awk '{print $3}'`
 
 	if [ -z "$INST" ]; then
 		echo "ERROR: Can't find an instance matching: $TAG"
