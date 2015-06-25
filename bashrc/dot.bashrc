@@ -68,13 +68,6 @@ function grb() {
     git rebase origin/$BR
 }
 
-# Switch AWS environment. Assumes each environ file
-# is an '$HOME/.ec2/$1/env'
-function aws()
-{
-	source $HOME/.ec2/$1/env
-}
-
 # Generate the Cassandra node's token value given its INDEX and the
 # TOTAL number of nodes
 function tokidx()
