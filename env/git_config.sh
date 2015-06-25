@@ -15,3 +15,6 @@ git config --global push.default tracking
 
 # Use color on terminals
 git config --global color.ui auto
+
+# Global gitconfig
+git config --global core.excludesfile ~/.gitignore_global

@@ -1,0 +1,5 @@
+# Ignore IDEA directories
+.idea
+
+# Maven/idea module file
+*.iml
