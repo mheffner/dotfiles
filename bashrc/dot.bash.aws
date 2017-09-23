@@ -74,6 +74,11 @@ function aws_assh_tag()
 	fi
 }
 
+alias ec2din='aenv aws --output=text ec2 describe-instances'
+alias ec2dtag='aenv aws --output=text ec2 describe-tags'
+alias ec2stop='aenv aws ec2 stop-instances --instance-ids'
+alias ec2start='aenv aws ec2 start-instances --instance-ids'
+alias ec2kill='aenv aws ec2 terminate-instances --instance-ids'
 
 # Local Variables:
 # mode: sh
