@@ -43,6 +43,11 @@ alias makeit='make -s clean && make -s all && make -s install'
 
 alias unrarit='unrar x -y'
 
+# networking debugging
+alias listeners="netstat -tulpn"
+alias curlhdrs="curl -I"
+alias ncactive="nc -vz"
+
 #
 # Convenience functions (ie., aliases with parameter support)
 #
