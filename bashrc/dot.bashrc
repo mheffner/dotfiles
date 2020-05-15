@@ -32,6 +32,8 @@ alias ackpg="ack --pager='less -R'"
 alias pjson="python -mjson.tool"
 alias be="bundle exec"
 alias bi="bundle install --path .bundle/gems"
+alias upcase="tr [a-z] [A-Z]"
+alias downcase="tr [A-Z] [a-z]"
 
 # This will get me all the time
 alias ci=vi
